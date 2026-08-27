@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Corner Operating Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#FFFFFF;--surface:#FFFFFF;--surface-2:#F4F6F7;--line:#DFE4E7;--line-soft:#EDF0F2;
+  --ink:#12171A;--ink-2:#3D474E;--muted:#6B767E;--accent:#A8641F;--accent-soft:#F5E9DB;
+  --ok:#2C6E52;--ok-soft:#E4F0EA;--warn:#9A6B12;--warn-soft:#F7EEDC;--crit:#A33528;--crit-soft:#FAE5E1;
+  --blue:#2C5878;--blue-soft:#E5EDF2;
+  --shadow:0 1px 2px rgba(18,23,26,.05),0 6px 18px -10px rgba(18,23,26,.16);--r:10px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0D1113;--surface:#151A1D;--surface-2:#1B2226;--line:#2A3439;--line-soft:#222A2E;
+  --ink:#E9ECEE;--ink-2:#B7C1C7;--muted:#818D95;--accent:#D28A44;--accent-soft:#3A2A18;
+  --ok:#6FBF95;--ok-soft:#172C23;--warn:#D6A64C;--warn-soft:#2E2617;--crit:#E0796A;--crit-soft:#33201C;
+  --blue:#7FB0D4;--blue-soft:#17242E;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{
+  --ground:#0D1113;--surface:#151A1D;--surface-2:#1B2226;--line:#2A3439;--line-soft:#222A2E;
+  --ink:#E9ECEE;--ink-2:#B7C1C7;--muted:#818D95;--accent:#D28A44;--accent-soft:#3A2A18;
+  --ok:#6FBF95;--ok-soft:#172C23;--warn:#D6A64C;--warn-soft:#2E2617;--crit:#E0796A;--crit-soft:#33201C;
+  --blue:#7FB0D4;--blue-soft:#17242E;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:"Public Sans",ui-sans-serif,system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding:22px 18px 72px}
+svg.i{width:14px;height:14px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px}
+svg.i.lg{width:16px;height:16px}
+.mast{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-bottom:13px;border-bottom:1.5px solid var(--line)}
+.mast h1{font-family:Archivo,sans-serif;font-weight:700;font-size:19px;margin:0;letter-spacing:-.015em;display:flex;align-items:center;gap:9px}
+.mast h1 svg{stroke:var(--accent);width:18px;height:18px}
+.mast .sub{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+.mast .spacer{flex:1}
+.themeBtn{font:inherit;font-size:11.5px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:99px;padding:5px 13px;cursor:pointer;font-family:"IBM Plex Mono",monospace;display:inline-flex;align-items:center;gap:6px}
+.themeBtn:hover{color:var(--ink);border-color:var(--muted)}
+.themeBtn:focus-visible,.tab:focus-visible,.fb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tabs{display:flex;gap:4px;margin:16px 0 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tab{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:9px 15px;cursor:pointer;margin-bottom:-1px;display:inline-flex;align-items:center;gap:7px}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--ink)}
+.panel[hidden]{display:none}
+h3.sec{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:24px 0 12px;font-weight:600;display:flex;align-items:center;gap:9px}
+h3.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+h3.sec .n{color:var(--ink)}
+h3.sec:first-child{margin-top:0}
+.note{border-left:2px solid var(--accent);padding:2px 0 2px 13px;margin:14px 0 0;font-size:13px;color:var(--ink-2);font-style:italic;max-width:82ch}
+
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:760px){.board{grid-template-columns:1fr}}
+.bx{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 15px;box-shadow:var(--shadow)}
+.bx.brd{border-top:3px solid var(--accent)}
+.bx .nm{font-family:Archivo,sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.bx .nm svg{stroke:var(--accent)}
+.bx .rl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-top:4px;font-weight:600}
+.bx .ds{font-size:13px;color:var(--ink-2);margin-top:7px}
+.rail{height:22px;position:relative}
+.rail::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;background:var(--line);transform:translateX(-50%)}
+.teams{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.teams{grid-template-columns:1fr}}
+.tm{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 15px;box-shadow:var(--shadow);border-top:3px solid var(--blue)}
+.tm .hd{font-family:Archivo,sans-serif;font-weight:600;font-size:14.5px;margin-bottom:2px;display:flex;align-items:center;gap:8px}
+.tm .hd svg{stroke:var(--blue)}
+.tm .ld{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--muted);margin-bottom:9px}
+.ppl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.ppl li{font-size:13px;display:flex;gap:8px;align-items:baseline}
+.ppl li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--blue);flex:none;transform:translateY(-2px)}
+.ppl li.open{color:var(--muted);font-style:italic}
+.ppl li.open::before{background:transparent;border:1.5px dashed var(--muted)}
+.xf{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);padding:14px 15px;margin-top:12px}
+.xf .hd{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.xfg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.xfg{grid-template-columns:1fr}}
+.xfb{background:var(--surface-2);border-radius:8px;padding:11px 13px}
+.xfb .t{font-weight:600;font-size:13.5px;margin-bottom:3px}
+.xfb .m{font-size:12.5px;color:var(--ink-2)}
+.plan{background:var(--warn-soft);border:1px solid var(--warn);border-radius:var(--r);padding:12px 15px;margin-top:12px;font-size:13.5px;color:var(--ink-2)}
+.plan b{color:var(--ink)}
+
+.filters{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.fb{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:5px 12px;cursor:pointer}
+.fb[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.pj{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:var(--r);padding:13px 15px;margin-bottom:8px;box-shadow:var(--shadow)}
+.pj.prod{border-left-color:var(--accent)}
+.pj.sales{border-left-color:var(--ok)}
+.pj.dem{border-left-color:var(--blue)}
+.pj.tech{border-left-color:var(--muted)}
+.pj.hire{border-left-color:var(--crit)}
+.ptop{display:flex;flex-wrap:wrap;align-items:baseline;gap:7px 11px;margin-bottom:5px}
+.ptop .num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--muted)}
+.ptop h4{font-family:Archivo,sans-serif;font-weight:600;font-size:15px;margin:0;letter-spacing:-.01em}
+.ptop .when{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 9px;white-space:nowrap}
+.blocks{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0 8px}
+.blk{font-size:12px;background:var(--surface-2);border-radius:5px;padding:3px 9px;color:var(--ink-2)}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.own{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:3px 9px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600;white-space:nowrap}
+.ctb{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:3px 9px;border-radius:99px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.gateflag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:var(--crit-soft);color:var(--crit);font-weight:600}
+
+.gate{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+.ghd{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:13px 16px;border-bottom:1px solid var(--line-soft);background:var(--surface-2)}
+.gnum{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;width:30px;height:30px;display:grid;place-items:center;border-radius:7px;background:var(--crit-soft);color:var(--crit);flex:none}
+.ghd h4{font-family:Archivo,sans-serif;font-weight:600;font-size:16px;margin:0;letter-spacing:-.012em}
+.ghd .dl{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--crit);background:var(--crit-soft);border-radius:99px;padding:4px 12px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.gbody{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:760px){.gbody{grid-template-columns:1fr}}
+.gcell{padding:13px 16px}
+.gcell+.gcell{border-left:1px solid var(--line-soft)}
+@media(max-width:760px){.gcell+.gcell{border-left:0;border-top:1px solid var(--line-soft)}}
+.gcell .lb{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.gcell p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.gcell ul{margin:0;padding-left:16px;font-size:13px;color:var(--ink-2)}
+.gcell li{margin-bottom:3px}
+.gfoot{padding:11px 16px;border-top:1px solid var(--line-soft);display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13px}
+th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:600;padding:0 9px 8px;border-bottom:1px solid var(--line)}
+td{padding:9px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+td:first-child{font-weight:500}
+.mbar{height:7px;border-radius:99px;display:block;opacity:.9;background:var(--accent)}
+.mbar.g{background:var(--ok)} .mbar.b{background:var(--blue)} .mbar.m{background:var(--muted)} .mbar.c{background:var(--crit)}
+.foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+@media print{
+  body{background:#fff}
+  .tabs,.themeBtn,.filters{display:none}
+  .panel[hidden]{display:block!important}
+  .pj,.gate,.bx,.tm,.tbl{break-inside:avoid;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<g id="ic-org"><path d="M12 3v4M5 21v-4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M12 7h0"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="2" y="15" width="6" height="6" rx="1"/><rect x="16" y="15" width="6" height="6" rx="1"/></g>
+<g id="ic-map"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></g>
+<g id="ic-gate"><path d="M12 2v20M4 7h16M4 17h16M4 2v20M20 2v20"/></g>
+<g id="ic-user"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></g>
+<g id="ic-team"><circle cx="9" cy="8" r="3"/><path d="M2.5 19a6.5 6.5 0 0 1 13 0"/><path d="M17 6.5a3 3 0 0 1 0 5.9M18.5 19a6.4 6.4 0 0 0-2-4.6"/></g>
+<g id="ic-link"><path d="M10 13a4 4 0 0 0 5.7 0l3-3A4 4 0 0 0 13 4.3l-1.7 1.7"/><path d="M14 11a4 4 0 0 0-5.7 0l-3 3A4 4 0 0 0 11 19.7l1.7-1.7"/></g>
+<g id="ic-block"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></g>
+<g id="ic-key"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5 21 2M17 6l3 3M14 9l3 3"/></g>
+<g id="ic-clock"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></g>
+<g id="ic-sun"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2M12 20.5v2M3.5 12h-2M22.5 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4"/></g>
+</defs></svg>
+
+<div class="wrap">
+  <div class="mast">
+    <h1><svg class="i lg" viewBox="0 0 24 24"><use href="#ic-map"/></svg>Corner Operating Plan</h1>
+    <span class="sub">Sep–Nov 2026</span>
+    <span class="spacer"></span>
+    <button class="themeBtn" id="tt" type="button"><svg class="i" viewBox="0 0 24 24"><use href="#ic-sun"/></svg><span id="ttl">theme</span></button>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="p-org" id="t-org"><svg class="i" viewBox="0 0 24 24"><use href="#ic-org"/></svg>Org structure</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-road" id="t-road"><svg class="i" viewBox="0 0 24 24"><use href="#ic-map"/></svg>Roadmap</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-gate" id="t-gate"><svg class="i" viewBox="0 0 24 24"><use href="#ic-gate"/></svg>Gates</button>
+  </div>
+
+  <section class="panel" id="p-org" role="tabpanel" aria-labelledby="t-org">
+    <h3 class="sec">Board <span class="n">3</span></h3>
+    <div class="board">
+      <div class="bx brd"><div class="nm"><svg class="i" viewBox="0 0 24 24"><use href="#ic-user"/></svg>Kostya</div><div class="rl">General management · Demand gen · Legal</div>
+        <div class="ds">CEO function — strategy, how the company works, operating cadence. Plus demand generation and legal.</div></div>
+      <div class="bx brd"><div class="nm"><svg class="i" viewBox="0 0 24 24"><use href="#ic-user"/></svg>Yulia</div><div class="rl">Operations</div>
+        <div class="ds">Technical, production, logistics, customer success.</div></div>
+      <div class="bx brd"><div class="nm"><svg class="i" viewBox="0 0 24 24"><use href="#ic-user"/></svg>Julieta</div><div class="rl">Sales &amp; Design</div>
+        <div class="ds">Customer track from discovery to 10% — conversions, velocity, efficiency.</div></div>
+    </div>
+    <p class="note">Hiring is a function of every senior role, not a separate one.</p>
+
+    <div class="rail"></div>
+
+    <h3 class="sec">Teams</h3>
+    <div class="teams">
+      <div class="tm">
+        <div class="hd"><svg class="i" viewBox="0 0 24 24"><use href="#ic-team"/></svg>Sales &amp; Design</div><div class="ld">lead · Julieta</div>
+        <ul class="ppl">
+          <li>Bruna — designer</li><li>Laís — designer</li><li>Suelen — designer</li>
+          <li class="open">Designer #4 — hiring</li><li class="open">Designer #5 — 2026</li>
+        </ul>
+      </div>
+      <div class="tm">
+        <div class="hd"><svg class="i" viewBox="0 0 24 24"><use href="#ic-team"/></svg>Operations</div><div class="ld">lead · Yulia</div>
+        <ul class="ppl">
+          <li>Borys — lead technical designer</li>
+          <li>Valentyna — project manager</li>
+          <li>Alex — developer</li>
+          <li class="open">Technical designer #2 — offer out</li>
+          <li class="open">Technical designer #3 — 2026</li>
+          <li class="open">Project manager #2 — hiring</li>
+          <li class="open">Project manager #3 — 2026</li>
+        </ul>
+      </div>
+      <div class="tm">
+        <div class="hd"><svg class="i" viewBox="0 0 24 24"><use href="#ic-team"/></svg>Demand gen</div><div class="ld">lead · Kostya</div>
+        <ul class="ppl">
+          <li>Vika — content</li>
+          <li class="open">Demand Lead — hiring</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="xf">
+      <div class="hd"><svg class="i" viewBox="0 0 24 24"><use href="#ic-link"/></svg>Cross-functional units</div>
+      <div class="xfg">
+        <div class="xfb"><div class="t">Physical product</div><div class="m">Kostya · Yulia · Borys · Julieta — standardization, cabinet library, sample library, collections</div></div>
+        <div class="xfb"><div class="t">Tech product</div><div class="m">Kostya · Yulia · Julieta · Alex — Studio, CRM, automations, AI coach</div></div>
+      </div>
+    </div>
+
+    <div class="plan"><b>Product is not a standing role this quarter.</b> It runs as a cross-functional project only. <b>Plan A:</b> Yulia takes the product role once the operations gaps are filled — second technical designer and second project manager.</div>
+  </section>
+
+  <section class="panel" id="p-road" role="tabpanel" aria-labelledby="t-road" hidden>
+    <div class="filters">
+      <button class="fb" data-f="all" aria-pressed="true">all</button>
+      <button class="fb" data-f="prod" aria-pressed="false">product</button>
+      <button class="fb" data-f="sales" aria-pressed="false">sales &amp; design</button>
+      <button class="fb" data-f="dem" aria-pressed="false">demand</button>
+      <button class="fb" data-f="tech" aria-pressed="false">tech</button>
+      <button class="fb" data-f="hire" aria-pressed="false">hiring</button>
+    </div>
+
+    <div class="pj prod" data-c="prod">
+      <div class="ptop"><span class="num">01</span><h4>Product standardization</h4><span class="when">Sep–Nov</span></div>
+      <div class="blocks"><span class="blk">Component database</span><span class="blk">Cabinet library with templates (repeatable layouts)</span><span class="blk">Product offering — boundaries, narrative, standard vs custom</span></div>
+      <div class="meta"><span class="own">Kostya</span><span class="ctb">Julieta</span><span class="ctb">Borys</span><span class="ctb">Yulia</span><span class="gateflag">needs G3</span></div>
+    </div>
+    <div class="pj prod" data-c="prod">
+      <div class="ptop"><span class="num">04</span><h4>Stainless steel collection launch</h4><span class="when">Sep</span></div>
+      <div class="blocks"><span class="blk">Finalize scenes</span><span class="blk">Add to website</span><span class="blk">Launch campaign</span></div>
+      <div class="meta"><span class="own">Kostya</span><span class="ctb">Julieta</span><span class="ctb">Vika</span></div>
+    </div>
+    <div class="pj prod" data-c="prod">
+      <div class="ptop"><span class="num">06</span><h4>Sample library v2.0</h4><span class="when">Sep–Oct</span></div>
+      <div class="blocks"><span class="blk">Viyar launch</span><span class="blk">Photoshoot</span><span class="blk">Airtable</span><span class="blk">Website</span></div>
+      <div class="meta"><span class="own">Valentyna</span><span class="ctb">Kostya</span></div>
+    </div>
+
+    <div class="pj sales" data-c="sales">
+      <div class="ptop"><span class="num">02</span><h4>Proposal standardization</h4><span class="when">Oct–Nov</span></div>
+      <div class="blocks"><span class="blk">Template presentation</span><span class="blk">Playbook</span></div>
+      <div class="meta"><span class="own">Julieta</span><span class="gateflag">needs G1 + G2</span></div>
+    </div>
+    <div class="pj sales" data-c="sales">
+      <div class="ptop"><span class="num">03</span><h4>Technical-drawing scope policy</h4><span class="when">Sep</span></div>
+      <div class="blocks"><span class="blk">Process rules — what we deliver and how</span></div>
+      <div class="meta"><span class="own">Borys</span><span class="ctb">Yulia</span><span class="ctb">Julieta</span></div>
+    </div>
+    <div class="pj sales" data-c="sales">
+      <div class="ptop"><span class="num">10</span><h4>CRM Sales</h4><span class="when">Sep–Oct</span></div>
+      <div class="blocks"><span class="blk">Pipeline &amp; stages</span><span class="blk">Tracker consolidation</span></div>
+      <div class="meta"><span class="own">Julieta</span><span class="ctb">Alex</span></div>
+    </div>
+
+    <div class="pj dem" data-c="dem">
+      <div class="ptop"><span class="num">05</span><h4>Photoshoot launches</h4><span class="when">Sep–Nov</span></div>
+      <div class="blocks"><span class="blk">New photoshoots</span><span class="blk">New PR campaign</span></div>
+      <div class="meta"><span class="own">Yulia</span><span class="ctb">Vika</span><span class="ctb">Kostya</span></div>
+    </div>
+    <div class="pj dem" data-c="dem">
+      <div class="ptop"><span class="num">07</span><h4>SEO boost — Japandi &amp; Scandinavian</h4><span class="when">continuous</span></div>
+      <div class="blocks"><span class="blk">Cluster build-out</span><span class="blk">Article production</span></div>
+      <div class="meta"><span class="own">Vika</span><span class="ctb">Kostya</span></div>
+    </div>
+    <div class="pj dem" data-c="dem">
+      <div class="ptop"><span class="num">08</span><h4>Reddit &amp; Houzz boost</h4><span class="when">Sep–Oct</span></div>
+      <div class="blocks"><span class="blk">Reddit presence</span><span class="blk">Houzz flywheel</span></div>
+      <div class="meta"><span class="own">Vika</span><span class="ctb">Kostya</span></div>
+    </div>
+
+    <div class="pj tech" data-c="tech">
+      <div class="ptop"><span class="num">09</span><h4>Project Studio v1.0</h4><span class="when">Sep–Oct</span></div>
+      <div class="blocks"><span class="blk">Project hub</span><span class="blk">File uploads</span><span class="blk">Moodboard creation</span></div>
+      <div class="meta"><span class="own">Alex</span><span class="ctb">Kostya</span><span class="ctb">Yulia</span><span class="ctb">Julieta</span></div>
+    </div>
+    <div class="pj tech" data-c="tech">
+      <div class="ptop"><span class="num">11</span><h4>CRM Operations</h4><span class="when">Oct–Nov</span></div>
+      <div class="blocks"><span class="blk">Production &amp; delivery tracking</span></div>
+      <div class="meta"><span class="own">Yulia</span><span class="ctb">Alex</span></div>
+    </div>
+    <div class="pj tech" data-c="tech">
+      <div class="ptop"><span class="num">12</span><h4>Invoice automation</h4><span class="when">Oct</span></div>
+      <div class="blocks"><span class="blk">Payment links</span><span class="blk">Tax &amp; scope handling</span></div>
+      <div class="meta"><span class="own">Alex</span><span class="ctb">Kostya</span></div>
+    </div>
+    <div class="pj tech" data-c="tech">
+      <div class="ptop"><span class="num">13</span><h4>Playbook-driven AI coach</h4><span class="when">Sep–Nov</span></div>
+      <div class="blocks"><span class="blk">Call scoring vs playbook</span><span class="blk">Pattern detection</span><span class="blk">Coaching output</span></div>
+      <div class="meta"><span class="own">Kostya</span><span class="ctb">Julieta</span><span class="ctb">Alex</span></div>
+    </div>
+    <div class="pj tech" data-c="tech">
+      <div class="ptop"><span class="num">14</span><h4>Email automations</h4><span class="when">Oct–Nov</span></div>
+      <div class="blocks"><span class="blk">Welcome</span><span class="blk">Follow-up</span><span class="blk">Nurturing</span></div>
+      <div class="meta"><span class="own">Alex</span><span class="ctb">Kostya</span><span class="ctb">Julieta</span></div>
+    </div>
+
+    <div class="pj hire" data-c="hire">
+      <div class="ptop"><span class="num">17</span><h4>New sales designer</h4><span class="when">Sep–Oct</span></div>
+      <div class="blocks"><span class="blk">Scorecard</span><span class="blk">Search</span><span class="blk">Onboarding</span></div>
+      <div class="meta"><span class="own">Kostya</span><span class="ctb">Julieta</span><span class="gateflag">unblocks G1</span></div>
+    </div>
+    <div class="pj hire" data-c="hire">
+      <div class="ptop"><span class="num">16</span><h4>Project manager</h4><span class="when">Sep–Oct</span></div>
+      <div class="blocks"><span class="blk">Search</span><span class="blk">Onboarding</span></div>
+      <div class="meta"><span class="own">Yulia</span></div>
+    </div>
+    <div class="pj hire" data-c="hire">
+      <div class="ptop"><span class="num">15</span><h4>Demand Lead</h4><span class="when">Oct–Nov</span></div>
+      <div class="blocks"><span class="blk">Scorecard</span><span class="blk">Search</span></div>
+      <div class="meta"><span class="own">Kostya</span></div>
+    </div>
+
+    <h3 class="sec">Timeline</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Project</th><th>Owner</th><th>Sep</th><th>Oct</th><th>Nov</th></tr></thead>
+        <tbody>
+          <tr><td>01 Product standardization</td><td>Kostya</td><td><span class="mbar" style="width:45%"></span></td><td><span class="mbar" style="width:100%"></span></td><td><span class="mbar" style="width:100%"></span></td></tr>
+          <tr><td>02 Proposal standardization</td><td>Julieta</td><td></td><td><span class="mbar g" style="width:70%"></span></td><td><span class="mbar g" style="width:100%"></span></td></tr>
+          <tr><td>03 TD scope policy</td><td>Borys</td><td><span class="mbar g" style="width:60%"></span></td><td></td><td></td></tr>
+          <tr><td>04 Stainless steel launch</td><td>Kostya</td><td><span class="mbar" style="width:80%"></span></td><td></td><td></td></tr>
+          <tr><td>05 Photoshoot launches</td><td>Yulia</td><td><span class="mbar b" style="width:100%"></span></td><td><span class="mbar b" style="width:100%"></span></td><td><span class="mbar b" style="width:70%"></span></td></tr>
+          <tr><td>06 Sample library v2.0</td><td>Valentyna</td><td><span class="mbar" style="width:100%"></span></td><td><span class="mbar" style="width:60%"></span></td><td></td></tr>
+          <tr><td>07 SEO Japandi/Scandi</td><td>Vika</td><td><span class="mbar b" style="width:100%"></span></td><td><span class="mbar b" style="width:100%"></span></td><td><span class="mbar b" style="width:100%"></span></td></tr>
+          <tr><td>08 Reddit &amp; Houzz</td><td>Vika</td><td><span class="mbar b" style="width:70%"></span></td><td><span class="mbar b" style="width:100%"></span></td><td></td></tr>
+          <tr><td>09 Project Studio v1.0</td><td>Alex</td><td><span class="mbar m" style="width:100%"></span></td><td><span class="mbar m" style="width:80%"></span></td><td></td></tr>
+          <tr><td>10 CRM Sales</td><td>Julieta</td><td><span class="mbar g" style="width:80%"></span></td><td><span class="mbar g" style="width:60%"></span></td><td></td></tr>
+          <tr><td>11 CRM Operations</td><td>Yulia</td><td></td><td><span class="mbar m" style="width:70%"></span></td><td><span class="mbar m" style="width:100%"></span></td></tr>
+          <tr><td>12 Invoice automation</td><td>Alex</td><td></td><td><span class="mbar m" style="width:80%"></span></td><td></td></tr>
+          <tr><td>13 AI coach</td><td>Kostya</td><td><span class="mbar m" style="width:70%"></span></td><td><span class="mbar m" style="width:100%"></span></td><td><span class="mbar m" style="width:100%"></span></td></tr>
+          <tr><td>14 Email automations</td><td>Alex</td><td></td><td><span class="mbar m" style="width:60%"></span></td><td><span class="mbar m" style="width:100%"></span></td></tr>
+          <tr><td>15 Demand Lead</td><td>Kostya</td><td><span class="mbar c" style="width:25%"></span></td><td><span class="mbar c" style="width:100%"></span></td><td><span class="mbar c" style="width:100%"></span></td></tr>
+          <tr><td>16 Project manager</td><td>Yulia</td><td><span class="mbar c" style="width:100%"></span></td><td><span class="mbar c" style="width:70%"></span></td><td></td></tr>
+          <tr><td>17 New sales designer</td><td>Kostya</td><td><span class="mbar c" style="width:100%"></span></td><td><span class="mbar c" style="width:80%"></span></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Kostya owns 5 of 17 — standardization, stainless steel, AI coach, Demand Lead, sales designer — on top of general management, demand gen and legal.</p>
+  </section>
+
+  <section class="panel" id="p-gate" role="tabpanel" aria-labelledby="t-gate" hidden>
+    <div class="gate">
+      <div class="ghd"><span class="gnum">G1</span><h4>Julieta hands off her active client projects</h4><span class="dl"><svg class="i" viewBox="0 0 24 24"><use href="#ic-clock"/></svg>14 Sep</span></div>
+      <div class="gbody">
+        <div class="gcell"><div class="lb"><svg class="i" viewBox="0 0 24 24"><use href="#ic-block"/></svg>The blocker</div>
+          <p>Her active client projects need to be handed over or finished in the next few weeks.</p></div>
+        <div class="gcell"><div class="lb"><svg class="i" viewBox="0 0 24 24"><use href="#ic-key"/></svg>What it unlocks</div>
+          <ul><li>She takes sales execution outright</li><li>Kostya exits the parallel designer 1:1s</li><li>Proposal standardization (02) can start</li></ul></div>
+      </div>
+      <div class="gfoot"><span class="own">Julieta</span><span class="ctb">Kostya</span><span class="ctb">receiving: Bruna · Laís · Suelen</span></div>
+    </div>
+
+    <div class="gate">
+      <div class="ghd"><span class="gnum">G2</span><h4>10% framework launched to designers</h4><span class="dl"><svg class="i" viewBox="0 0 24 24"><use href="#ic-clock"/></svg>7 Sep</span></div>
+      <div class="gbody">
+        <div class="gcell"><div class="lb"><svg class="i" viewBox="0 0 24 24"><use href="#ic-block"/></svg>The blocker</div>
+          <p>Built and reviewed. Remaining step is release to the designers, not build.</p></div>
+        <div class="gcell"><div class="lb"><svg class="i" viewBox="0 0 24 24"><use href="#ic-key"/></svg>What it unlocks</div>
+          <ul><li>Design-stage conversion becomes measurable and coachable</li><li>Proposal standardization (02) inherits the framework</li><li>Stainless steel launch (04) follows it</li></ul></div>
+      </div>
+      <div class="gfoot"><span class="own">Julieta</span><span class="ctb">Kostya — push</span><span class="ctb">Yulia — review</span></div>
+    </div>
+
+    <div class="gate">
+      <div class="ghd"><span class="gnum">G3</span><h4>Technical designer hired and onboarded</h4><span class="dl"><svg class="i" viewBox="0 0 24 24"><use href="#ic-clock"/></svg>signed 31 Aug · started 30 Sep</span></div>
+      <div class="gbody">
+        <div class="gcell"><div class="lb"><svg class="i" viewBox="0 0 24 24"><use href="#ic-block"/></svg>The blocker</div>
+          <p>Borys is fully loaded on client technical drawings, so standardization work cannot start. Offer to Denys: €1,600 probation → €1,800 after three months, 3–4 week transition.</p></div>
+        <div class="gcell"><div class="lb"><svg class="i" viewBox="0 0 24 24"><use href="#ic-key"/></svg>What it unlocks</div>
+          <ul><li>Borys freed for the component database and cabinet library</li><li>Product standardization (01) — the spine of the quarter</li><li>Technical-drawing throughput stops capping the 10% stage</li></ul></div>
+      </div>
+      <div class="gfoot"><span class="own">Yulia</span><span class="ctb">Borys — technical assessment</span><span class="ctb">Kostya — comp approval</span></div>
+    </div>
+
+    <h3 class="sec">Dependency order</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Gate</th><th>Deadline</th><th>Owner</th><th>Projects held</th></tr></thead>
+        <tbody>
+          <tr><td>G2 · 10% framework</td><td>7 Sep</td><td>Julieta</td><td>02 · 04</td></tr>
+          <tr><td>G1 · Client hand-off</td><td>14 Sep</td><td>Julieta</td><td>02</td></tr>
+          <tr><td>G3 · TD hired</td><td>31 Aug signed · 30 Sep started</td><td>Yulia</td><td>01</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">G3 is the only gate with an external clock. G1 and G2 are both decisions inside the building.</p>
+  </section>
+
+  <div class="foot">Sep–Nov 2026 · 17 projects · 3 gates · board of 3</div>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement,lbl=document.getElementById('ttl');
+  function setLbl(){var t=root.getAttribute('data-theme');lbl.textContent=t?t:'auto';}
+  try{var sv=localStorage.getItem('cop-theme');if(sv)root.setAttribute('data-theme',sv);}catch(e){}
+  setLbl();
+  document.getElementById('tt').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    var next=cur==='light'?'dark':(cur==='dark'?null:'light');
+    if(next){root.setAttribute('data-theme',next)}else{root.removeAttribute('data-theme')}
+    try{next?localStorage.setItem('cop-theme',next):localStorage.removeItem('cop-theme')}catch(e){}
+    setLbl();
+  });
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function show(id){
+    tabs.forEach(function(t){
+      var sel=t.id===id;
+      t.setAttribute('aria-selected',sel?'true':'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!sel;
+    });
+    try{localStorage.setItem('cop-tab',id)}catch(e){}
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.id)})});
+  var last=null;try{last=localStorage.getItem('cop-tab')}catch(e){}
+  if(last&&document.getElementById(last)){show(last)}
+  var fbs=[].slice.call(document.querySelectorAll('.fb'));
+  fbs.forEach(function(b){b.addEventListener('click',function(){
+    fbs.forEach(function(x){x.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');
+    var f=b.dataset.f;
+    document.querySelectorAll('.pj').forEach(function(p){
+      p.style.display=(f==='all'||p.dataset.c===f)?'':'none';
+    });
+  })});
+})();
+</script>
+
+</body>
+</html>
